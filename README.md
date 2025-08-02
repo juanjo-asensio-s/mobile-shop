@@ -32,8 +32,7 @@ Mini aplicación en React desarrollada como solución a la prueba técnica de IT
 
 - Listado de productos (con búsqueda en tiempo real)
 - Vista de detalles del producto
-- Añadir al carrito (para persistir, se ha tomado el count devuelto por la API como el valor al que sumarle al carrito
-  actual)
+- Añadir al carrito (para persistir, se ha tomado el count devuelto por la API como el valor actual)
 - Persistencia de datos con expiración de 1h
 - Breadcumbs de navegación
 - Gestión de stock (si no trae precio, se considera producto agotado)

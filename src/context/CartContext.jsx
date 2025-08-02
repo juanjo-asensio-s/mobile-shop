@@ -15,8 +15,8 @@ export function CartProvider({children}) {
         localStorage.setItem('cartCount', cartCount.toString());
     }, [cartCount]);
 
-    const addToCart = (quantity) => {
-        setCartCount(prevCount => prevCount + quantity);
+    const addToCart = (newCount) => {
+             setCartCount(newCount);
     };
 
     const resetCart = () => {

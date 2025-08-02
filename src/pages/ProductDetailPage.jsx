@@ -15,6 +15,7 @@ export default function ProductDetailPage() {
     const [addSuccess, setAddSuccess] = useState(false);
 
     const isAvailable = product && product.price !== undefined && product.price !== null && product.price !== '';
+    const hasWeight =  product && product.weight !== undefined && product.weight !== null && product.weight !== '';
 
     useEffect(() => {
         if (!product) return;
@@ -51,71 +52,69 @@ export default function ProductDetailPage() {
     if (!product) return <div className="loading">Cargando producto...</div>;
 
     return (
-        <div className="product-detail">
-            <div className="product-image">
-                <img src={product.imgUrl} alt={product.model}/>
+        <div className="detail-container">
+            <div className="image-section">
+                <img src={product.imgUrl} alt={product.model} />
             </div>
 
-            <div className="product-info">
-                <h1>{product.brand} {product.model}</h1>
-                <p className={isAvailable ? 'price' : 'unavailable'}>
-                    {isAvailable ? `${product.price}€` : 'Producto agotado'}
-                </p>
-
-                <div className="specs">
-                    <p><strong>CPU:</strong> {product.cpu}</p>
-                    <p><strong>RAM:</strong> {product.ram}</p>
-                    <p><strong>Sistema Operativo:</strong> {product.os}</p>
-                    <p><strong>Pantalla:</strong> {product.displayResolution}</p>
-                    <p><strong>Batería:</strong> {product.battery}</p>
-                    <p><strong>Cámaras:</strong> {product.primaryCamera} / {product.secondaryCmera}</p>
-                    <p><strong>Dimensiones:</strong> {product.dimentions}</p>
-                    <p><strong>Peso:</strong> {product.weight} g.</p>
+            <div className="info-section">
+                <h2>{product.brand} {product.model}</h2>
+                {isAvailable ? (<p className={`product-price ${isAvailable ? 'price-available' : 'unavailable'}`}>
+                    {product.price} €</p>) : <p></p>}
+                <div className="selector-group">
+                    <label>Color:</label>
+                    <div className="color-options">
+                        {product.options.colors.map((color) => (
+                            <div
+                                key={color.code}
+                                className={`color-box ${selectedColor === color.code ? 'selected' : ''}`}
+                                style={{ backgroundColor: color.name.toLowerCase() }}
+                                title={color.name}
+                                onClick={() => setSelectedColor(color.code)}
+                            />
+                        ))}
+                    </div>
                 </div>
 
-                {isAvailable && (
-                    <>
-                        <div className="selectors">
-                            <div className="selector-group">
-                                <label>Almacenamiento:</label>
-                                <select
-                                    value={selectedStorage}
-                                    onChange={(e) => setSelectedStorage(e.target.value)}
-                                    disabled={isAdding}
-                                >
-                                    {product.options.storages.map((s) => (
-                                        <option key={s.code} value={s.code}>{s.name}</option>
-                                    ))}
-                                </select>
-                            </div>
+                <ul>
+                    <li><strong>CPU:</strong> {product.cpu}</li>
+                    <li><strong>RAM:</strong> {product.ram}</li>
+                    <li><strong>Sistema Operativo:</strong> {product.os}</li>
+                    <li><strong>Tamaño Pantalla:</strong> {product.displayResolution}</li>
+                    <li><strong>Tipo Pantalla:</strong> {product.displayType}</li>
+                    <li><strong>Batería:</strong> {product.battery}</li>
+                    <li><strong>Cámaras:</strong> {product.primaryCamera} / {product.secondaryCamera}</li>
+                    <li><strong>Dimensiones:</strong> {product.dimentions}</li>
+                    {hasWeight && (
+                        <li><strong>Peso:</strong> {product.weight} g</li>
+                    )}
+                </ul>
+            </div>
 
-                            <div className="selector-group">
-                                <label>Color:</label>
-                                <select
-                                    value={selectedColor}
-                                    onChange={(e) => setSelectedColor(e.target.value)}
-                                    disabled={isAdding}
-                                >
-                                    {product.options.colors.map((c) => (
-                                        <option key={c.code} value={c.code}>{c.name}</option>
-                                    ))}
-                                </select>
-                            </div>
-                        </div>
+            <div className="actions-section">
+                <label>
+                    Almacenamiento:
+                    <select>{product.options?.storages?.map(o => (
+                        <option key={o.code} value={o.code}>{o.name}</option>
+                    ))}</select>
+                </label>
 
-                        <div className="actions">
-                            <button
-                                className={`add-button ${isAdding ? 'adding' : ''} ${addSuccess ? 'success' : ''}`}
-                                onClick={handleAddToCart}
-                                disabled={!isAvailable || isAdding}
-                            >
-                                {isAdding ? 'Añadiendo...' :
-                                    addSuccess ? '✓ Añadido!' : 'Añadir al carrito'}
-                            </button>
-                        </div>
-                    </>
+                {isAvailable ? (
+                    <button
+                        className={`add-button ${isAdding ? 'adding' : ''} ${addSuccess ? 'success' : ''}`}
+                        onClick={handleAddToCart}
+                        disabled={isAdding}
+                    >
+                        {isAdding ? 'Añadiendo...' :
+                            addSuccess ? '✓ Añadido!' : 'Añadir al carrito'}
+                    </button>
+                ) : (
+                    <button className="add-button disabled" disabled>
+                        Producto agotado
+                    </button>
                 )}
             </div>
         </div>
+
     );
 }

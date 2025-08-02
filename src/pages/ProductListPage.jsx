@@ -16,10 +16,11 @@ export default function ProductListPage() {
 
     return (
         <div className="p-4">
-            <div className="flex justify-between items-center mb-4">
-                <h1 className="text-2xl font-bold">Listado de productos</h1>
-                <SearchBar value={searchTerm} onChange={setSearchTerm}/>
+            <div className="centered-header">
+                <h1>Listado de productos</h1>
+                <SearchBar value={searchTerm} onChange={setSearchTerm} />
             </div>
+
 
             <div className="grid-container">
                 {filteredProducts.length > 0 ? (
