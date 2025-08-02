@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://itx-frontend-test.onrender.com/api';
+const BASE_URL = '/api';
 
 export const getProducts = () => axios.get(`${BASE_URL}/product`).then(res => res.data);
 
