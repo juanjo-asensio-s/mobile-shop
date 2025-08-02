@@ -7,7 +7,7 @@ import {defineConfig, globalIgnores} from 'eslint/config';
 export default defineConfig([
     globalIgnores(['dist']),
 
-    // Configuración general para JS/JSX
+    // General config
     {
         files: ['**/*.{js,jsx}'],
         extends: [
@@ -29,7 +29,7 @@ export default defineConfig([
         },
     },
 
-    // Configuración específica para tests con Vitest
+    // Vitest
     {
         files: ['**/*.test.{js,jsx}'],
         plugins: {

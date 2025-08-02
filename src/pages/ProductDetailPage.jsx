@@ -3,6 +3,22 @@ import {useParams} from 'react-router-dom';
 import {addToCart, getProductById} from '../api/api';
 import useFetchWithCache from '../hooks/useFetchWithCache';
 import {CartContext} from '../context/CartContext';
+import {
+    faMicrochip,
+    faMemory,
+    faMobileScreenButton,
+    faCamera,
+    faArrowsUpDownLeftRight,
+    faWeightHanging,
+    faMobileAndroid,
+    faRuler,
+    faTag,
+    faBarcode,
+    faBattery4,
+    faCameraRotate
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {FaShoppingCart} from "react-icons/fa";
 
 export default function ProductDetailPage() {
     const {id} = useParams();
@@ -61,43 +77,83 @@ export default function ProductDetailPage() {
                 <h2>{product.brand} {product.model}</h2>
                 {isAvailable ? (<p className={`product-price ${isAvailable ? 'price-available' : 'unavailable'}`}>
                     {product.price} €</p>) : <p></p>}
-                <div className="selector-group">
-                    <label>Color:</label>
-                    <div className="color-options">
-                        {product.options.colors.map((color) => (
-                            <div
-                                key={color.code}
-                                className={`color-box ${selectedColor === color.code ? 'selected' : ''}`}
-                                style={{ backgroundColor: color.name.toLowerCase() }}
-                                title={color.name}
-                                onClick={() => setSelectedColor(color.code)}
-                            />
-                        ))}
-                    </div>
-                </div>
-
-                <ul>
-                    <li><strong>CPU:</strong> {product.cpu}</li>
-                    <li><strong>RAM:</strong> {product.ram}</li>
-                    <li><strong>Sistema Operativo:</strong> {product.os}</li>
-                    <li><strong>Tamaño Pantalla:</strong> {product.displayResolution}</li>
-                    <li><strong>Tipo Pantalla:</strong> {product.displayType}</li>
-                    <li><strong>Batería:</strong> {product.battery}</li>
-                    <li><strong>Cámaras:</strong> {product.primaryCamera} / {product.secondaryCamera}</li>
-                    <li><strong>Dimensiones:</strong> {product.dimentions}</li>
+                <ul className="specs-list">
+                    <li>
+                        <FontAwesomeIcon icon={faTag} /> <strong>Marca:</strong> {product.brand}
+                    </li>
+                    <li>
+                        <FontAwesomeIcon icon={faBarcode} /> <strong>Modelo:</strong> {product.model}
+                    </li>
+                    <li>
+                        <FontAwesomeIcon icon={faMicrochip} /> <strong>CPU:</strong> {product.cpu}
+                    </li>
+                    <li>
+                        <FontAwesomeIcon icon={faMemory} /> <strong>RAM:</strong> {product.ram}
+                    </li>
+                    <li>
+                        <FontAwesomeIcon icon={faMobileAndroid} /> <strong>Sistema Operativo:</strong> {product.os}
+                    </li>
+                    <li>
+                        <FontAwesomeIcon icon={faMobileScreenButton} /> <strong>Pantalla:</strong> {product.displayResolution} / {product.displayType}
+                    </li>
+                    <li>
+                        <FontAwesomeIcon icon={faArrowsUpDownLeftRight} /> <strong>Resolución:</strong> {product.displaySize}
+                    </li>
+                    <li>
+                        <FontAwesomeIcon icon={faBattery4} /> <strong>Batería:</strong> {product.battery}
+                    </li>
+                    <li>
+                        <FontAwesomeIcon icon={faCamera} /> <strong>Cámara principal:</strong> {Array.isArray(product.primaryCamera) ? product.primaryCamera.join(' ') : product.primaryCamera}
+                    </li>
+                    {product.secondaryCmera && (
+                    <li>
+                        <FontAwesomeIcon icon={faCameraRotate} /> <strong>Cámara frontal:</strong> {Array.isArray(product.secondaryCmera) ? product.secondaryCmera.join(' ') : product.secondaryCmera}
+                    </li>
+                    )}
+                    <li>
+                        <FontAwesomeIcon icon={faRuler} /> <strong>Dimensiones:</strong> {product.dimentions}
+                    </li>
                     {hasWeight && (
-                        <li><strong>Peso:</strong> {product.weight} g</li>
+                        <li>
+                            <FontAwesomeIcon icon={faWeightHanging} /> <strong>Peso:</strong> {product.weight} g
+                        </li>
                     )}
                 </ul>
             </div>
 
             <div className="actions-section">
-                <label>
-                    Almacenamiento:
-                    <select>{product.options?.storages?.map(o => (
-                        <option key={o.code} value={o.code}>{o.name}</option>
-                    ))}</select>
-                </label>
+                <div className="selector-group">
+                    <div className="color-options"><label><b>Color:</b></label>
+                        {product.options.colors.map((color) => (
+                            <div
+                                key={color.code}
+                                className={`color-box-wrapper ${selectedColor === color.code ? 'selected' : ''}`}
+                                onClick={() => setSelectedColor(color.code)}
+                            >
+                                <div
+                                    className="color-box"
+                                    style={{ backgroundColor: color.name.split(' ').pop().toLowerCase() }}
+                                    title={color.name}
+                                />
+                                <span className="color-name">{color.name}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <div className="selector-group">
+                    <label><b>Almacenamiento:&nbsp;</b></label>
+                        {product.options?.storages?.map((o) => (
+                            <button
+                                key={o.code}
+                                type="button"
+                                className={`storage-button ${selectedStorage === o.code ? 'selected' : ''}`}
+                                onClick={() => setSelectedStorage(o.code)}
+                            >
+                                {o.name}
+                            </button>
+                        ))}
+                </div>
 
                 {isAvailable ? (
                     <button
@@ -106,7 +162,8 @@ export default function ProductDetailPage() {
                         disabled={isAdding}
                     >
                         {isAdding ? 'Añadiendo...' :
-                            addSuccess ? '✓ Añadido!' : 'Añadir al carrito'}
+                            addSuccess ? '✓ Añadido!' :  (<><FaShoppingCart style={{ marginRight: '8px' }} /> Añadir al carrito</>)
+                        }
                     </button>
                 ) : (
                     <button className="add-button disabled" disabled>

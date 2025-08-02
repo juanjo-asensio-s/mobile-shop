@@ -18,6 +18,6 @@ test('renderiza un producto con precio', () => {
     );
 
     expect(getByText('Acer Liquid Z6')).toBeInTheDocument();
-    expect(getByText('999€')).toBeInTheDocument();
+    expect(getByText('999 €')).toBeInTheDocument();
     expect(getByAltText('Liquid Z6')).toBeInTheDocument();
 });

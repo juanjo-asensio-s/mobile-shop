@@ -256,15 +256,6 @@ input[type="text"]:focus {
     border: 1px solid #ccc;
 }
 
-.actions-section button {
-    padding: 0.75rem 1.5rem;
-    background-color: #0077cc;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
 .add-button.disabled {
     background-color: #ccc;
     color: #666;
@@ -280,11 +271,17 @@ input[type="text"]:focus {
 .price-available {
     color: #0077cc;
 }
-
 .color-options {
     display: flex;
-    gap: 0.5rem;
+    gap: 1rem;
     margin-top: 0.5rem;
+}
+
+.color-box-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
 }
 
 .color-box {
@@ -292,11 +289,61 @@ input[type="text"]:focus {
     height: 24px;
     border-radius: 4px;
     border: 2px solid #ccc;
-    cursor: pointer;
     transition: border 0.2s ease;
 }
 
-.color-box.selected {
-    border: 2px solid #0077cc;
+.color-box-wrapper.selected .color-box {
+    border-color: #0077cc;
     box-shadow: 0 0 0 2px rgba(0, 119, 204, 0.3);
 }
+
+.color-name {
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+}
+
+.storage-options {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.storage-button {
+    padding: 0.5rem 1.2rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f0f0f0;
+    color: #333;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.storage-button:hover {
+    background-color: #e0e0e0;
+}
+
+.storage-button.selected {
+    background-color: #222;
+    color: #fff;
+    border-color: #222;
+}
+
+.specs-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.specs-list li {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+

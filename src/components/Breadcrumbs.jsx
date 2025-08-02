@@ -11,7 +11,7 @@ export default function Breadcrumbs() {
         const pathnames = location.pathname.split('/').filter(Boolean);
         if (pathnames[0] === 'product' && pathnames[1]) {
             getProductById(pathnames[1]).then((p) => {
-                if (p) setProductName(p.model);
+                if (p) setProductName(p.brand + ' ' + p.model);
             });
         } else {
             setProductName(null);
