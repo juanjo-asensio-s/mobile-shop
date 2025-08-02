@@ -4,6 +4,7 @@
   "description": "Mini aplicación SPA para la prueba técnica de ITX",
   "scripts": {
     "dev": "vite",
+    "start": "vite",
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest",

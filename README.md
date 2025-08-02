@@ -2,12 +2,20 @@
 
 Mini aplicación en React desarrollada como solución a la prueba técnica de ITX.
 
+## Requisitos
+
+- Node.js >= 22.12.0
+- npm >= 9.x
+
+
 ## Scripts disponibles
 
-- `npm run dev`: Ejecuta la app en modo desarrollo.
-- `npm run build`: Genera la build de producción.
-- `npm run test`: Ejecuta los test
-- `npm run lint`: Linting del código.
+- `npm run dev`: arranca la aplicación en modo desarrollo
+- `npm start`: alias de `dev`
+- `npm run build`: compila la aplicación para entornos productivos
+- `npm run preview`: previsualiza la versión para entornos productivos
+- `npm run test`: ejecuta los tests con Vitest
+- `npm run lint`: comprueba errores de lint con ESLint
 
 ## Tecnologías
 
