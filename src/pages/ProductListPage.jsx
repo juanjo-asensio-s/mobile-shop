@@ -8,7 +8,7 @@ export default function ProductListPage() {
     const products = useFetchWithCache('products', getProducts);
     const [searchTerm, setSearchTerm] = useState('');
 
-    if (!products) return <div className="p-4">Cargando productos...</div>;
+    if (!products) return <div className="main-container">Cargando productos...</div>;
 
     const filteredProducts = products.filter((p) =>
         `${p.brand} ${p.model}`.toLowerCase().includes(searchTerm.toLowerCase())
@@ -28,7 +28,7 @@ export default function ProductListPage() {
                         <ProductCard key={product.id} product={product}/>
                     ))
                 ) : (
-                    <p className="col-span-full text-center text-gray-500">No se encontraron productos.</p>
+                    <p className="">No se encontraron productos.</p>
                 )}
             </div>
         </div>

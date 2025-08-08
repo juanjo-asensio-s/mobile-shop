@@ -1,4 +1,5 @@
 import { FaSearch } from 'react-icons/fa';
+import '../styles/search-bar.css';
 
 export default function SearchBar({ value, onChange }) {
     return (

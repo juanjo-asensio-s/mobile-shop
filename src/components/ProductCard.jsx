@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import '../styles/product-card.css';
 
 export default function ProductCard({product}) {
     const isAvailable = product.price !== undefined && product.price !== null && product.price !== '';
@@ -9,10 +10,10 @@ export default function ProductCard({product}) {
             <img
                 src={product.imgUrl}
                 alt={product.model}
-                className="w-full h-40 object-contain"
+                className="product-image"
             />
             <div className="product-title">{product.brand} {product.model}</div>
-            <p className={isAvailable ? '' : 'out-of-stock'}>
+            <p className={isAvailable ? 'product-card-price' : 'out-of-stock'}>
                 {isAvailable ? `${product.price} €` : 'Agotado'}
             </p>
         </Link>

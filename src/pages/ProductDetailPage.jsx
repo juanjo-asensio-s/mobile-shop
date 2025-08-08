@@ -19,6 +19,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {FaShoppingCart} from "react-icons/fa";
+import '../styles/product-detail.css';
+
 
 export default function ProductDetailPage() {
     const {id} = useParams();
@@ -45,6 +47,26 @@ export default function ProductDetailPage() {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [product]);
+
+    useEffect(() => {
+        if (product) {
+            document.title = `${product.brand} ${product.model} - ITX Shop`;
+
+            const ogTitle = document.querySelector('meta[property="og:title"]');
+            if (ogTitle) ogTitle.setAttribute('content', document.title);
+
+            const ogDesc = document.querySelector('meta[property="og:description"]');
+            if (ogDesc) ogDesc.setAttribute('content', `Consulta las características del ${product.brand} ${product.model} y añádelo al carrito.`);
+
+            const ogImage = document.querySelector('meta[property="og:image"]');
+            if (ogImage) ogImage.setAttribute('content', `${product.imgUrl}` );
+
+            const ogUrl = document.querySelector('meta[property="og:url"]');
+            if (ogUrl) ogUrl.setAttribute('content', window.location.href);
+        }
+    }, [product]);
+
+
 
 
     const handleAddToCart = async () => {
