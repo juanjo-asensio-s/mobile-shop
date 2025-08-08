@@ -397,3 +397,32 @@ input[type="text"]:focus {
     gap: 0.5rem;
 }
 
+@media (max-width: 767px) {
+    .detail-container {
+        grid-template-columns: 1fr;
+        grid-column: 1;
+    }
+
+    .image-section,
+    .info-section,
+    .actions-section {
+        grid-column: 1;
+    }
+
+    .image-section {
+        padding: 1rem;
+    }
+
+    .actions-section {
+        grid-column: auto !important;
+    }
+    .search-icon {
+        padding: 0;
+    }
+    .search-container {
+        position: relative;
+        max-width: 85%;
+        padding: 0;
+    }
+
+}
