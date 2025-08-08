@@ -15,7 +15,7 @@ export default function ProductListPage() {
     );
 
     return (
-        <div className="p-4">
+        <div className="main-container">
             <div className="centered-header">
                 <h1>Listado de productos</h1>
                 <SearchBar value={searchTerm} onChange={setSearchTerm} />
