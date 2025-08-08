@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useLocation} from 'react-router-dom';
 import {getProductById} from '../api/api';
+import '../styles/Breadcrumbs.css';
 
 export default function Breadcrumbs() {
     const location = useLocation();
@@ -20,7 +21,7 @@ export default function Breadcrumbs() {
 
 
     return (
-        <nav style={{padding: '1rem', fontSize: '0.9rem'}}>
+        <nav className="breadcrumbs-nav">
             <Link to="/">Inicio</Link>
             {pathnames[0] === 'product' && productName && (
                 <>

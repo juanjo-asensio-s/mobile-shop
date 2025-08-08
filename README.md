@@ -36,6 +36,7 @@ Mini aplicación en React desarrollada como solución a la prueba técnica de IT
 - Persistencia de datos con expiración de 1h
 - Breadcumbs de navegación
 - Gestión de stock (si no trae precio, se considera producto agotado)
+- Estilo responsive
 - Metadatos SEO 
 
 ## API
